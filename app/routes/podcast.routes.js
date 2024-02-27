@@ -1,20 +1,24 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router();
-const podcastController = require('../controllers/podcast.controller');
+import podcastController from '../controllers/podcast.controller.js';
 
-// GET all podcasts
-router.get('/podcasts', podcastController.getAllPodcasts);
 
-// GET a specific podcast by ID
-router.get('/podcasts/:id', podcastController.getPodcastById);
 
-// POST a new podcast
-router.post('/podcasts', podcastController.createPodcast);
+export default app => {
+    // GET all podcasts
+    router.get('/', podcastController.getAllPodcasts);
 
-// PUT (update) a specific podcast by ID
-router.put('/podcasts/:id', podcastController.updatePodcast);
+    // GET a specific podcast by ID
+    router.get('/:id', podcastController.getPodcastById);
 
-// DELETE a specific podcast by ID
-router.delete('/podcasts/:id', podcastController.deletePodcast);
+    // POST a new podcast
+    router.post('/', podcastController.createPodcast);
 
-module.exports = router;
+    // PUT (update) a specific podcast by ID
+    router.put('/:id', podcastController.updatePodcast);
+
+    // DELETE a specific podcast by ID
+    router.delete('/:id', podcastController.deletePodcast);
+
+    app.use('/app/podcasts', router);
+}

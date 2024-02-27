@@ -1,20 +1,24 @@
-const express = require('express');
+import express from 'express';
+import epTagsController from '../controllers/ep_tags.controller.js';
+
 const router = express.Router();
-const epTagsController = require('../controllers/ep_tags.controller');
 
-// GET all ep_tags
-router.get('/ep_tags', epTagsController.getAll);
+export default app => {
 
-// GET a single ep_tag by ID
-router.get('/ep_tags/:id', epTagsController.getById);
+    // Create a new ep_tag
+    router.post("/", epTagsController.create);
 
-// CREATE a new ep_tag
-router.post('/ep_tags', epTagsController.create);
+    // Retrieve all ep_tags
+    router.get("/", epTagsController.getAll);
 
-// UPDATE an existing ep_tag
-router.put('/ep_tags/:id', epTagsController.update);
+    // Retrieve a single ep_tag with id
+    router.get("/:id", epTagsController.getById);
 
-// DELETE an ep_tag
-router.delete('/ep_tags/:id', epTagsController.delete);
+    // Update a ep_tag with id
+    router.put("/:id", epTagsController.update);
 
-module.exports = router;
+    // Delete a ep_tag with id
+    router.delete("/:id", epTagsController.deleteEpTag);
+
+    app.use('/app/ep_tags', router);
+}

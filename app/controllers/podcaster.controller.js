@@ -1,7 +1,9 @@
-const { Podcaster } = require('../models');
+import { Podcaster } from '../models/podcaster.model.js';
+
+const podcasterController = {};
 
 // Create a new podcaster
-exports.createPodcaster = async (req, res) => {
+podcasterController.createPodcaster = async (req, res) => {
     try {
         const { Name, Surname, Username, BirthDate, Password, Email } = req.body;
         const podcaster = await Podcaster.create({
@@ -19,7 +21,7 @@ exports.createPodcaster = async (req, res) => {
 };
 
 // Get all podcasters
-exports.getAllPodcasters = async (req, res) => {
+podcasterController.getAllPodcasters = async (req, res) => {
     try {
         const podcasters = await Podcaster.findAll();
         res.status(200).json(podcasters);
@@ -29,7 +31,7 @@ exports.getAllPodcasters = async (req, res) => {
 };
 
 // Get a single podcaster by ID
-exports.getPodcasterById = async (req, res) => {
+podcasterController.getPodcasterById = async (req, res) => {
     try {
         const { id } = req.params;
         const podcaster = await Podcaster.findByPk(id);
@@ -43,7 +45,7 @@ exports.getPodcasterById = async (req, res) => {
 };
 
 // Update a podcaster by ID
-exports.updatePodcasterById = async (req, res) => {
+podcasterController.updatePodcasterById = async (req, res) => {
     try {
         const { id } = req.params;
         const { Name, Surname, Username, BirthDate, Password, Email } = req.body;
@@ -66,7 +68,7 @@ exports.updatePodcasterById = async (req, res) => {
 };
 
 // Delete a podcaster by ID
-exports.deletePodcasterById = async (req, res) => {
+podcasterController.deletePodcasterById = async (req, res) => {
     try {
         const { id } = req.params;
         const podcaster = await Podcaster.findByPk(id);
@@ -79,3 +81,5 @@ exports.deletePodcasterById = async (req, res) => {
         res.status(500).json({ error: 'Internal server error' });
     }
 };
+
+export default podcasterController;

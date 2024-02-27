@@ -1,20 +1,24 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router();
-const podcasterEpController = require('../controllers/podcaster_ep.controller');
+import podcasterEpController from '../controllers/podcaster_ep.controller.js';
 
-// GET /podcaster_ep
-router.get('/', podcasterEpController.getAllPodcasterEp);
 
-// GET /podcaster_ep/:id
-router.get('/:id', podcasterEpController.getPodcasterEpById);
 
-// POST /podcaster_ep
-router.post('/', podcasterEpController.createPodcasterEp);
+export default app => {
+    // GET /podcaster_ep
+    router.get('/', podcasterEpController.getAllPodcasterEp);
 
-// PUT /podcaster_ep/:id
-router.put('/:id', podcasterEpController.updatePodcasterEpById);
+    // GET /podcaster_ep/:id
+    router.get('/:id', podcasterEpController.getPodcasterEpById);
 
-// DELETE /podcaster_ep/:id
-router.delete('/:id', podcasterEpController.deletePodcasterEpById);
+    // POST /podcaster_ep
+    router.post('/', podcasterEpController.createPodcasterEp);
 
-module.exports = router;
+    // PUT /podcaster_ep/:id
+    router.put('/:id', podcasterEpController.updatePodcasterEpById);
+
+    // DELETE /podcaster_ep/:id
+    router.delete('/:id', podcasterEpController.deletePodcasterEpById);
+
+    app.use('/app/podcaster_ep', router);
+};

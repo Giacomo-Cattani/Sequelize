@@ -1,4 +1,5 @@
-module.exports = (sequelize, DataTypes) => {
+import { DataTypes } from 'sequelize';
+const Podcaster = (sequelize) => {
     const Podcaster = sequelize.define('Podcaster', {
         id: {
             type: DataTypes.INTEGER,
@@ -36,3 +37,5 @@ module.exports = (sequelize, DataTypes) => {
 
     return Podcaster;
 };
+
+export { Podcaster };

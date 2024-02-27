@@ -1,14 +1,18 @@
 // Import necessary modules
-const express = require('express');
+import express from 'express';
 const router = express.Router();
-const reviewController = require('../controllers/review.controller');
+import reviewController from '../controllers/review.controller.js';
 
-// Define routes
-router.get('/reviews', reviewController.getAllReviews);
-router.get('/reviews/:id', reviewController.getReviewById);
-router.post('/reviews', reviewController.createReview);
-router.put('/reviews/:id', reviewController.updateReviewById);
-router.delete('/reviews/:id', reviewController.deleteReviewById);
 
 // Export the router
-module.exports = router;
+export default app => {
+
+    // Define routes
+    router.get('/', reviewController.getAllReviews);
+    router.get('/:id', reviewController.getReviewById);
+    router.post('/', reviewController.createReview);
+    router.put('/:id', reviewController.updateReviewById);
+    router.delete('/:id', reviewController.deleteReviewById);
+
+    app.use('/app/reviews', router);
+};

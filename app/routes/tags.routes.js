@@ -1,14 +1,18 @@
 // Import necessary modules
-const express = require('express');
+import express from 'express';
 const router = express.Router();
-const tagsController = require('../controllers/tags.controller');
+import tagsController from '../controllers/tags.controller.js';
 
-// Define routes
-router.get('/tags', tagsController.getAllTags);
-router.get('/tags/:id', tagsController.getTagById);
-router.post('/tags', tagsController.createTag);
-router.put('/tags/:id', tagsController.updateTagById);
-router.delete('/tags/:id', tagsController.deleteTagById);
 
 // Export the router
-module.exports = router;
+export default app => {
+
+    // Define routes
+    router.get('/', tagsController.getAllTags);
+    router.get('/:id', tagsController.getTagById);
+    router.post('/', tagsController.createTag);
+    router.put('/:id', tagsController.updateTagById);
+    router.delete('/:id', tagsController.deleteTagById);
+
+    app.use('/app/tags', router);
+};

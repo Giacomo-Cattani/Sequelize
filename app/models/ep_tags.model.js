@@ -1,16 +1,18 @@
-module.exports = (sequelize, Sequelize) => {
+import { DataTypes } from 'sequelize';
+
+const EpTag = (sequelize, Sequelize) => {
     const Ep_tags = sequelize.define("ep_tags", {
         Id: {
-            type: Sequelize.INTEGER,
+            type: DataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true
         },
         Fk_Tags: {
-            type: Sequelize.INTEGER,
+            type: DataTypes.INTEGER,
             allowNull: false
         },
         Fk_Episode: {
-            type: Sequelize.INTEGER,
+            type: DataTypes.INTEGER,
             allowNull: false
         }
     }, {
@@ -31,3 +33,7 @@ module.exports = (sequelize, Sequelize) => {
 
     return Ep_tags;
 };
+
+export { EpTag }; // Exporting the EpTag function
+
+export default EpTag; // Exporting the EpTag function as default

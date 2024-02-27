@@ -1,20 +1,24 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router();
-const usersController = require('../controllers/users_ep.controller');
+import usersController from '../controllers/users_ep.controller.js';
 
-// GET /users
-router.get('/users', usersController.getAllUserEps);
 
-// GET /users/:id
-router.get('/users/:id', usersController.getUserEpById);
+export default app => {
 
-// POST /users
-router.post('/users', usersController.createUserEp);
+    // GET /users
+    router.get('/', usersController.getAllUserEps);
 
-// PUT /users/:id
-router.put('/users/:id', usersController.updateUserEpById);
+    // GET /users/:id
+    router.get('/:id', usersController.getUserEpById);
 
-// DELETE /users/:id
-router.delete('/users/:id', usersController.deleteUserEpById);
+    // POST /users
+    router.post('/', usersController.createUserEp);
 
-module.exports = router;
+    // PUT /users/:id
+    router.put('/:id', usersController.updateUserEpById);
+
+    // DELETE /users/:id
+    router.delete('/:id', usersController.deleteUserEpById);
+
+    app.use('/app/users_ep', router);
+};

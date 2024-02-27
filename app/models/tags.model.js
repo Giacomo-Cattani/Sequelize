@@ -1,4 +1,6 @@
-module.exports = (sequelize, Sequelize) => {
+import { Sequelize } from 'sequelize';
+
+const Tag = (sequelize, Sequelize) => {
     const Tag = sequelize.define("tag", {
         Id: {
             type: Sequelize.INTEGER,
@@ -17,3 +19,5 @@ module.exports = (sequelize, Sequelize) => {
     });
     return Tag;
 };
+
+export { Tag };

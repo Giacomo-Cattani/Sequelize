@@ -1,7 +1,7 @@
-const { UserEp } = require('../models'); // Import the UserEp model
+import { UserEp } from '../models/users_ep.model.js'; // Import the UserEp model
 
 // Create a new UserEp
-exports.createUserEp = async (req, res) => {
+export const createUserEp = async (req, res) => {
     try {
         const { StartDate, EndDate, Fk_User, Fk_Ep } = req.body;
         const userEp = await UserEp.create({ StartDate, EndDate, Fk_User, Fk_Ep });
@@ -12,7 +12,7 @@ exports.createUserEp = async (req, res) => {
 };
 
 // Get all UserEps
-exports.getAllUserEps = async (req, res) => {
+export const getAllUserEps = async (req, res) => {
     try {
         const userEps = await UserEp.findAll();
         res.status(200).json(userEps);
@@ -22,7 +22,7 @@ exports.getAllUserEps = async (req, res) => {
 };
 
 // Get a single UserEp by ID
-exports.getUserEpById = async (req, res) => {
+export const getUserEpById = async (req, res) => {
     try {
         const { id } = req.params;
         const userEp = await UserEp.findByPk(id);
@@ -37,7 +37,7 @@ exports.getUserEpById = async (req, res) => {
 };
 
 // Update a UserEp by ID
-exports.updateUserEpById = async (req, res) => {
+export const updateUserEpById = async (req, res) => {
     try {
         const { id } = req.params;
         const { StartDate, EndDate, Fk_User, Fk_Ep } = req.body;
@@ -58,7 +58,7 @@ exports.updateUserEpById = async (req, res) => {
 };
 
 // Delete a UserEp by ID
-exports.deleteUserEpById = async (req, res) => {
+export const deleteUserEpById = async (req, res) => {
     try {
         const { id } = req.params;
         const userEp = await UserEp.findByPk(id);
@@ -72,3 +72,12 @@ exports.deleteUserEpById = async (req, res) => {
         res.status(500).json({ error: 'Failed to delete UserEp' });
     }
 };
+
+const usersController = {
+    createUserEp,
+    getAllUserEps,
+    getUserEpById,
+    updateUserEpById,
+    deleteUserEpById
+};
+export default usersController

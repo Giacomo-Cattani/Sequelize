@@ -1,7 +1,9 @@
-const { Episode, Podcast } = require('../models');
+import { Episode } from '../models/episodes.model.js';
+import { Podcast } from '../models/podcast.model.js';
 
 // Create a new episode
-exports.createEpisode = async (req, res) => {
+
+export const createEpisode = async (req, res) => {
     try {
         const { Title, Description, CreationDate, Fk_Podcast } = req.body;
 
@@ -27,7 +29,7 @@ exports.createEpisode = async (req, res) => {
 };
 
 // Get all episodes
-exports.getAllEpisodes = async (req, res) => {
+export const getAllEpisodes = async (req, res) => {
     try {
         const episodes = await Episode.findAll();
         return res.status(200).json(episodes);
@@ -38,7 +40,7 @@ exports.getAllEpisodes = async (req, res) => {
 };
 
 // Get a single episode by ID
-exports.getEpisodeById = async (req, res) => {
+export const getEpisodeById = async (req, res) => {
     try {
         const { id } = req.params;
 
@@ -55,7 +57,7 @@ exports.getEpisodeById = async (req, res) => {
 };
 
 // Update an episode
-exports.updateEpisode = async (req, res) => {
+export const updateEpisode = async (req, res) => {
     try {
         const { id } = req.params;
         const { Title, Description, CreationDate, Fk_Podcast } = req.body;
@@ -88,7 +90,7 @@ exports.updateEpisode = async (req, res) => {
 };
 
 // Delete an episode
-exports.deleteEpisode = async (req, res) => {
+export const deleteEpisode = async (req, res) => {
     try {
         const { id } = req.params;
 
@@ -107,3 +109,13 @@ exports.deleteEpisode = async (req, res) => {
         return res.status(500).json({ error: 'Server error' });
     }
 };
+
+const episodesController = {
+    createEpisode,
+    getAllEpisodes,
+    getEpisodeById,
+    updateEpisode,
+    deleteEpisode,
+};
+
+export default episodesController;

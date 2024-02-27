@@ -1,20 +1,22 @@
-module.exports = (sequelize, Sequelize) => {
-    const Review = sequelize.define("review", {
+import { DataTypes } from 'sequelize';
+
+const Review = (sequelize) => {
+    const ReviewModel = sequelize.define("review", {
         Id: {
-            type: Sequelize.INTEGER,
+            type: DataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true
         },
         Stars: {
-            type: Sequelize.INTEGER,
+            type: DataTypes.INTEGER,
             allowNull: false
         },
         Comment: {
-            type: Sequelize.STRING(100),
+            type: DataTypes.STRING(100),
             allowNull: false
         },
         Fk_User: {
-            type: Sequelize.INTEGER,
+            type: DataTypes.INTEGER,
             allowNull: false,
             references: {
                 model: 'users',
@@ -22,7 +24,7 @@ module.exports = (sequelize, Sequelize) => {
             }
         },
         Fk_Ep: {
-            type: Sequelize.INTEGER,
+            type: DataTypes.INTEGER,
             allowNull: false,
             references: {
                 model: 'episodes',
@@ -35,16 +37,18 @@ module.exports = (sequelize, Sequelize) => {
         charset: 'utf8mb4'
     });
 
-    Review.associate = (models) => {
-        Review.belongsTo(models.User, {
+    ReviewModel.associate = (models) => {
+        ReviewModel.belongsTo(models.User, {
             foreignKey: 'Fk_User',
             as: 'user'
         });
-        Review.belongsTo(models.Episode, {
+        ReviewModel.belongsTo(models.Episode, {
             foreignKey: 'Fk_Ep',
             as: 'episode'
         });
     };
 
-    return Review;
+    return ReviewModel;
 };
+
+export { Review };

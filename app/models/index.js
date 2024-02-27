@@ -1,21 +1,31 @@
-const Sequelize = require("sequelize");
+import Sequelize from "sequelize";
+import podcastModel from "./podcast.model.js";
+import podcasterModel from "./podcaster.model.js";
+import tagsModel from "./tags.model.js";
+import usersModel from "./users.model.js";
+import episodesModel from "./episodes.model.js";
+import reviewModel from "./review.model.js";
+import podcasterEpModel from "./podcaster_ep.model.js";
+import usersEpModel from "./users_ep.model.js";
+import epTagsModel from "./ep_tags.model.js";
 
 const sequelize = new Sequelize("podcast", "root", "", {
     host: "localhost",
     dialect: 'mysql' /* one of 'mysql' | 'mariadb' | 'postgres' | 'mssql' */
 });
+
 const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
-db.podcast = require("./podcast.model.js")(sequelize, Sequelize);
-db.podcaster = require("./podcaster.model.js")(sequelize, Sequelize);
-db.tags = require("./tags.model.js")(sequelize, Sequelize);
-db.users = require("./users.model.js")(sequelize, Sequelize);
-db.episodes = require("./episodes.model.js")(sequelize, Sequelize);
-db.review = require("./review.model.js")(sequelize, Sequelize);
-db.podcaster_ep = require("./podcaster_ep.model.js")(sequelize, Sequelize);
-db.users_ep = require("./users_ep.model.js")(sequelize, Sequelize);
-db.ep_tags = require("./ep_tags.model.js")(sequelize, Sequelize);
+db.podcast = podcastModel(sequelize, Sequelize);
+db.podcaster = podcasterModel(sequelize, Sequelize);
+db.tags = tagsModel(sequelize, Sequelize);
+db.users = usersModel(sequelize, Sequelize);
+db.episodes = episodesModel(sequelize, Sequelize);
+db.review = reviewModel(sequelize, Sequelize);
+db.podcaster_ep = podcasterEpModel(sequelize, Sequelize);
+db.users_ep = usersEpModel(sequelize, Sequelize);
+db.ep_tags = epTagsModel(sequelize, Sequelize);
 
 // Assuming that the models are defined and assigned to the db object
 
@@ -55,5 +65,4 @@ db.tags.belongsToMany(db.episodes, { through: 'ep_tags', foreignKey: 'Fk_Tags', 
 // Episodes belong to many Tags through Ep_Tags
 db.episodes.belongsToMany(db.tags, { through: 'ep_tags', foreignKey: 'Fk_Episode', otherKey: 'Fk_Tags' });
 
-
-module.exports = db;
+export default db;

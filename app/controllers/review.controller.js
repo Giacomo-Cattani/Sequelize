@@ -1,7 +1,9 @@
-const { Review, User, Episode } = require('../models');
+import { Review } from '../models/review.model.js';
+import { User } from '../models/users.model.js';
+import { Episode } from '../models/episodes.model.js';
 
 // Create a new review
-exports.createReview = async (req, res) => {
+export const createReview = async (req, res) => {
   try {
     const { stars, comment, fkUser, fkEpisode } = req.body;
 
@@ -20,7 +22,7 @@ exports.createReview = async (req, res) => {
 };
 
 // Get all reviews
-exports.getAllReviews = async (req, res) => {
+export const getAllReviews = async (req, res) => {
   try {
     const reviews = await Review.findAll({
       include: [
@@ -37,7 +39,7 @@ exports.getAllReviews = async (req, res) => {
 };
 
 // Get a single review by ID
-exports.getReviewById = async (req, res) => {
+export const getReviewById = async (req, res) => {
   try {
     const { id } = req.params;
 
@@ -60,7 +62,7 @@ exports.getReviewById = async (req, res) => {
 };
 
 // Update a review by ID
-exports.updateReviewById = async (req, res) => {
+export const updateReviewById = async (req, res) => {
   try {
     const { id } = req.params;
     const { stars, comment } = req.body;
@@ -84,7 +86,7 @@ exports.updateReviewById = async (req, res) => {
 };
 
 // Delete a review by ID
-exports.deleteReviewById = async (req, res) => {
+export const deleteReviewById = async (req, res) => {
   try {
     const { id } = req.params;
 
@@ -102,3 +104,12 @@ exports.deleteReviewById = async (req, res) => {
     res.status(500).json({ message: 'Internal server error' });
   }
 };
+
+const reviewController = {
+  createReview,
+  getAllReviews,
+  getReviewById,
+  updateReviewById,
+  deleteReviewById,
+};
+export default reviewController

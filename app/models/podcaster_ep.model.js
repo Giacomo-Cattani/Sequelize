@@ -1,16 +1,17 @@
-module.exports = (sequelize, Sequelize) => {
+import { DataTypes } from 'sequelize';
+export const PodcasterEp = (sequelize, Sequelize) => {
     const PodcasterEp = sequelize.define("podcaster_ep", {
         Id: {
-            type: Sequelize.INTEGER,
+            type: DataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true
         },
         Fk_Podcaster: {
-            type: Sequelize.INTEGER,
+            type: DataTypes.INTEGER,
             allowNull: false
         },
         Fk_Episode: {
-            type: Sequelize.INTEGER,
+            type: DataTypes.INTEGER,
             allowNull: false
         }
     }, {

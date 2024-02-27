@@ -1,20 +1,24 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router();
-const podcasterController = require('../controllers/podcaster.controller');
+import podcasterController from '../controllers/podcaster.controller.js';
 
-// GET /podcasters
-router.get('/podcasters', podcasterController.getAllPodcasters);
 
-// GET /podcasters/:id
-router.get('/podcasters/:id', podcasterController.getPodcasterById);
+export default app => {
 
-// POST /podcasters
-router.post('/podcasters', podcasterController.createPodcaster);
+    // GET /podcasters
+    router.get('/', podcasterController.getAllPodcasters);
 
-// PUT /podcasters/:id
-router.put('/podcasters/:id', podcasterController.updatePodcasterById);
+    // GET /podcasters/:id
+    router.get('/:id', podcasterController.getPodcasterById);
 
-// DELETE /podcasters/:id
-router.delete('/podcasters/:id', podcasterController.deletePodcasterById);
+    // POST /podcasters
+    router.post('/', podcasterController.createPodcaster);
 
-module.exports = router;
+    // PUT /podcasters/:id
+    router.put('/:id', podcasterController.updatePodcasterById);
+
+    // DELETE /podcasters/:id
+    router.delete('/:id', podcasterController.deletePodcasterById);
+
+    app.use('/app/podcasters', router);
+};

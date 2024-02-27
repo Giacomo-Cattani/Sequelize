@@ -1,28 +1,31 @@
-const { DataTypes } = require('sequelize');
-const sequelize = require('../config/database');
+import { DataTypes } from 'sequelize';
 
-const Podcast = sequelize.define('Podcast', {
-    Id: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        autoIncrement: true,
-        primaryKey: true
-    },
-    Name: {
-        type: DataTypes.STRING(100),
-        allowNull: false
-    },
-    Description: {
-        type: DataTypes.STRING(100),
-        allowNull: false
-    },
-    CreateDate: {
-        type: DataTypes.DATE,
-        allowNull: false
-    }
-}, {
-    tableName: 'podcast',
-    timestamps: false
-});
+const Podcast = (sequelize) => {
+    const PodcastModel = sequelize.define('Podcast', {
+        Id: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            autoIncrement: true,
+            primaryKey: true
+        },
+        Name: {
+            type: DataTypes.STRING(100),
+            allowNull: false
+        },
+        Description: {
+            type: DataTypes.STRING(100),
+            allowNull: false
+        },
+        CreateDate: {
+            type: DataTypes.DATE,
+            allowNull: false
+        }
+    }, {
+        tableName: 'podcast',
+        timestamps: false
+    });
 
-module.exports = Podcast;
+    return PodcastModel;
+};
+
+export { Podcast };

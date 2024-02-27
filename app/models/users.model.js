@@ -1,37 +1,39 @@
-module.exports = (sequelize, Sequelize) => {
-    const User = sequelize.define("user", {
+import { DataTypes } from 'sequelize';
+const User = (sequelize) => {
+    return sequelize.define("user", {
         Id: {
-            type: Sequelize.INTEGER,
+            type: DataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true
         },
         Name: {
-            type: Sequelize.STRING,
+            type: DataTypes.STRING,
             allowNull: false
         },
         Surname: {
-            type: Sequelize.STRING,
+            type: DataTypes.STRING,
             allowNull: false
         },
         Username: {
-            type: Sequelize.STRING,
+            type: DataTypes.STRING,
             allowNull: false
         },
         Email: {
-            type: Sequelize.STRING,
+            type: DataTypes.STRING,
             allowNull: false
         },
         BirthDate: {
-            type: Sequelize.DATEONLY,
+            type: DataTypes.DATEONLY,
             allowNull: false
         },
         Password: {
-            type: Sequelize.STRING,
+            type: DataTypes.STRING,
             allowNull: false
         }
     }, {
         tableName: 'users',
         timestamps: false
     });
-    return User;
 };
+
+export { User };

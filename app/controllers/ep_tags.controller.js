@@ -1,7 +1,9 @@
-const { EpTag } = require('../models');
+import { EpTag } from '../models/ep_tags.model.js';
 
 // Create a new ep_tag
-exports.create = async (req, res) => {
+const epTagsController = {};
+
+epTagsController.create = async (req, res) => {
   try {
     const { Fk_Tags, Fk_Episode } = req.body;
     const ep_tag = await EpTag.create({ Fk_Tags, Fk_Episode });
@@ -11,8 +13,7 @@ exports.create = async (req, res) => {
   }
 };
 
-// Get all ep_tags
-exports.getAll = async (req, res) => {
+epTagsController.getAll = async (req, res) => {
   try {
     const ep_tags = await EpTag.findAll();
     res.status(200).json(ep_tags);
@@ -21,8 +22,7 @@ exports.getAll = async (req, res) => {
   }
 };
 
-// Get a single ep_tag by Id
-exports.getById = async (req, res) => {
+epTagsController.getById = async (req, res) => {
   try {
     const { id } = req.params;
     const ep_tag = await EpTag.findByPk(id);
@@ -35,8 +35,7 @@ exports.getById = async (req, res) => {
   }
 };
 
-// Update an ep_tag
-exports.update = async (req, res) => {
+epTagsController.update = async (req, res) => {
   try {
     const { id } = req.params;
     const { Fk_Tags, Fk_Episode } = req.body;
@@ -51,8 +50,7 @@ exports.update = async (req, res) => {
   }
 };
 
-// Delete an ep_tag
-exports.delete = async (req, res) => {
+epTagsController.deleteEpTag = async (req, res) => {
   try {
     const { id } = req.params;
     const ep_tag = await EpTag.findByPk(id);
@@ -65,3 +63,5 @@ exports.delete = async (req, res) => {
     res.status(500).json({ error: 'Internal server error' });
   }
 };
+
+export default epTagsController;

@@ -1,24 +1,25 @@
-module.exports = (sequelize, Sequelize) => {
+import { DataTypes } from 'sequelize';
+const UserEp = (sequelize, Sequelize) => {
     const UsersEp = sequelize.define("users_ep", {
         Id: {
-            type: Sequelize.INTEGER,
+            type: DataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true
         },
         StartDate: {
-            type: Sequelize.FLOAT,
+            type: DataTypes.FLOAT,
             allowNull: false
         },
         EndDate: {
-            type: Sequelize.FLOAT,
+            type: DataTypes.FLOAT,
             allowNull: false
         },
         Fk_User: {
-            type: Sequelize.INTEGER,
+            type: DataTypes.INTEGER,
             allowNull: false
         },
         Fk_Ep: {
-            type: Sequelize.INTEGER,
+            type: DataTypes.INTEGER,
             allowNull: false
         }
     }, {
@@ -39,3 +40,5 @@ module.exports = (sequelize, Sequelize) => {
 
     return UsersEp;
 };
+
+export { UserEp };
